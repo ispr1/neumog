@@ -8,7 +8,7 @@ export default function PressPage() {
           eyebrow="Press"
           title="Press & media kit"
           description="Need a quote, logo pack, or background on Neumog's hybrid model? Use the details below or drop us a note."
-          align="center"
+          alignment="center"
         />
         <div className="grid gap-6 rounded-[32px] border border-[var(--border-soft)] bg-[var(--card-surface)] p-10 shadow-[0_18px_60px_rgba(36,20,8,0.1)] md:grid-cols-2">
           <div>
