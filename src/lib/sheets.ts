@@ -15,9 +15,18 @@ export const appendToSheet = async (values: string[]) => {
 
     const sheets = google.sheets({ version: 'v4', auth });
 
+    // clean the sheet ID if the user pasted the full URL
+    let spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    if (spreadsheetId.startsWith('http')) {
+        const matches = spreadsheetId.match(/\/d\/([a-zA-Z0-9-_]+)/);
+        if (matches && matches[1]) {
+            spreadsheetId = matches[1];
+        }
+    }
+
     try {
         const response = await sheets.spreadsheets.values.append({
-            spreadsheetId: process.env.GOOGLE_SHEET_ID,
+            spreadsheetId,
             range: 'Sheet1!A:A', // Appends to the first sheet, assuming columns match
             valueInputOption: 'USER_ENTERED',
             requestBody: {
@@ -26,8 +35,11 @@ export const appendToSheet = async (values: string[]) => {
         });
         console.log('Sheet updated:', response.data);
         return response.data;
-    } catch (error) {
-        console.error('Error appending to sheet:', error);
+    } catch (error: any) {
+        console.error('Error appending to sheet:', error.message);
+        if (error.response) {
+            console.error('API Error Response:', JSON.stringify(error.response.data, null, 2));
+        }
         throw error;
     }
 };

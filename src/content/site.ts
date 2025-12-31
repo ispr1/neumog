@@ -1,9 +1,11 @@
 import type { FAQItem } from "@/content/types";
 
 export const navLinks = [
+  { label: "About", href: "/about" },
   { label: "How it works", href: "/how-it-works" },
   { label: "Services", href: "/services" },
   { label: "Expert Collective", href: "/experts" },
+  { label: "Careers", href: "/careers" },
   { label: "Blog", href: "/blog" },
 ];
 
@@ -22,7 +24,7 @@ export const logoCloud = {
   heading: "Dozens of companies ship with Neumog",
   supportingText:
     "Operating as a trusted, confidential extension of product teams for high-growth ventures across e-commerce, hospitality, delivery, and AI/ML.",
-  logos: ["A1 Care", "Check 360", "Aster Hospital", "Mealawe", "Raapo", "Anvayaa"],
+  logos: ["A1 Care", "Check 360", "Aster Hospital", "Mealawe", "Rapoo", "Anvayaa"],
 };
 
 export const whyNeumog = {
@@ -116,12 +118,31 @@ export const testimonials = {
       author: "Anvesh Sharma",
       role: "CTO, hospitality chain",
     },
+    // Adding more for the slider effect
+    {
+      quote:
+        "The velocity we achieved with the hybrid squad was unmatched. It felt like they were part of our core team from day one.",
+      author: "Sarah Jenkins",
+      role: "VP of Engineering, FinTech Scaleup",
+    },
+    {
+      quote:
+        "Their vetted expert network meant we didn't have to compromise on quality even with a tight deadline.",
+      author: "Michael Chen",
+      role: "Founder, AI SaaS",
+    },
+    {
+      quote:
+        "Seamless integration with our internal processes. The transparency in billing and progress was refreshing.",
+      author: "Elena Rodriguez",
+      role: "Product Director, E-commerce Giant",
+    },
   ],
   featured: {
     quote:
       "We needed deep domain expertise and Al-driven personalization. Neumog assembled a blended team faster than we could open reqs.",
-    author: "Dina Rahman",
-    role: "Head of Product, retail collective",
+    author: "Lakshmi Srinivas",
+    role: "Head of Product, Check 360",
   },
 };
 
@@ -189,6 +210,66 @@ export const blogPosts = [
     href: "/blog/rlhf-pods",
     tag: "AI/ML",
   },
+  {
+    title: "From Legacy to Lightning: Modernizing Without Breaking Business",
+    excerpt: "How forward-thinking CTOs upgrade critical systems while keeping operations stable. Neumog modernizes quietly and efficiently to eliminate downtime risks.",
+    href: "/blog/legacy-to-lightning",
+    tag: "Engineering",
+  },
+  {
+    title: "Why Startups Fail at Product Scaling (And How to Avoid the Iceberg)",
+    excerpt: "An honest look at architecture shortcuts and tech debt. Discover how scalable design decisions today save massive costs tomorrow.",
+    href: "/blog/startup-scaling",
+    tag: "Startups",
+  },
+  {
+    title: "AI as a Teammate, Not a Tool: Building Copilots for Real Workflows",
+    excerpt: "Moving beyond the hype: How customized AI copilots and automations are transforming day-to-day operations in finance and support.",
+    href: "/blog/ai-teammate",
+    tag: "AI/ML",
+  },
+  {
+    title: "Design That Sells: Why UX Is Becoming a Revenue Strategy",
+    excerpt: "UX isn't just decoration—it's a growth lever. We analyze how optimized onboarding flows and checkout clarity directly impact conversion.",
+    href: "/blog/design-revenue",
+    tag: "Design",
+  },
+  {
+    title: "Founders’ Playbook: Building MVPs That Actually Hit Market Fit",
+    excerpt: "A practical checklist for MVP planning and iteration. Learn why partnering with strategic product builders beats hiring just 'coders'.",
+    href: "/blog/mvp-playbook",
+    tag: "Product",
+  },
+  {
+    title: "Data-driven Decisions: Building Analytics Into Your Product DNA",
+    excerpt: "Products that measure, win. Products that guess, stall. How to embed event tracking and metrics culture from day one.",
+    href: "/blog/data-decisions",
+    tag: "Data",
+  },
+  {
+    title: "Automation First: Letting Systems Do the Heavy Lifting",
+    excerpt: "Save time by automating workflows in Ops, HR, and Marketing. See how businesses unlock productivity by delegating to code.",
+    href: "/blog/automation-first",
+    tag: "Automation",
+  },
+  {
+    title: "Security by Design: Building Products That Scale Safely",
+    excerpt: "Why security needs to be an architectural pillar, not an afterthought. Role-based access and compliance for enterprise trust.",
+    href: "/blog/security-design",
+    tag: "Security",
+  },
+  {
+    title: "Why Product Teams Fail Without a Discovery Culture",
+    excerpt: "Shipping fast is useless if you're shipping the wrong thing. How user research prevents costly misbuilds.",
+    href: "/blog/discovery-culture",
+    tag: "Product",
+  },
+  {
+    title: "The Neumog Delivery Model: Transparent, Predictable, Outcome-Driven",
+    excerpt: "How our values of transparency and execution discipline build trust with MNCs. A look inside our process.",
+    href: "/blog/neumog-model",
+    tag: "Inside Neumog",
+  },
 ];
 
 export const faqHeading = {
@@ -216,14 +297,15 @@ export const faqItems: FAQItem[] = [
 
 export const contactInfo = {
   email: "hello@neumog.com",
-  phone: "+1 (312) 555-0146",
+  phone: "+91 83094 70360",
+  whatsapp: "+91 89853 95260",
   address: "Distributed team across country, NA, EU, and APAC",
 };
 
 export const footerLinks = {
   company: [
-    { label: "About", href: "/how-it-works" },
-    { label: "Careers", href: "/experts" },
+    { label: "About", href: "/about" },
+    { label: "Careers", href: "/careers" },
     { label: "Press", href: "/press" },
   ],
   work: [

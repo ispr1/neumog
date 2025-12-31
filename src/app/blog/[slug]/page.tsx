@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { blogPosts } from "@/content/site";
+import Image from "next/image";
+import { blogPostDetails } from "@/content/blog-details";
+import { ArrowLeft, Clock, Calendar } from "lucide-react";
+import { BlogPostContent } from "@/components/blog/BlogPostContent";
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
@@ -8,21 +11,18 @@ interface BlogPageProps {
 
 export default async function BlogPostPage({ params }: BlogPageProps) {
   const { slug } = await params;
-  const post = blogPosts.find((item) => item.href.endsWith(slug));
-
+  const post = blogPostDetails[slug];
 
   if (!post) {
     return (
-      <article className="bg-[var(--sand-50)] py-24 text-[var(--ink-900)]">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h1 className="mt-6 text-3xl font-semibold">Article Not Available</h1>
+      <article className="bg-[var(--sand-50)] py-24 text-[var(--ink-900)] min-h-screen flex items-center justify-center">
+        <div className="mx-auto max-w-2xl px-6 text-center">
+          <h1 className="text-3xl font-bold tracking-tight">Article Not Found</h1>
           <p className="mt-4 text-lg text-[var(--muted-600)]">
-            This article is not published on our site. For more insights, visit our official LinkedIn page for the latest articles and news.
+            The article you are looking for does not exist or has been moved.
           </p>
-          <div className="mt-12 border-t border-[var(--border-soft)] pt-6 text-sm text-[var(--muted-600)]">
-            <a href="https://www.linkedin.com/company/neumog/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-600)] underline">View on LinkedIn</a>
-            <br />
-            <Link href="/blog" className="text-[var(--accent-600)] block mt-4">
+          <div className="mt-8">
+            <Link href="/blog" className="text-[var(--accent-600)] hover:text-[var(--accent-700)] font-medium">
               ← Back to all posts
             </Link>
           </div>
@@ -32,30 +32,46 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
   }
 
   return (
-    <article className="bg-[var(--sand-50)] py-24 text-[var(--ink-900)]">
-      <div className="mx-auto max-w-3xl px-6">
-        <p className="text-sm uppercase tracking-[0.3em] text-[var(--accent-600)]">{post.tag}</p>
-        <h1 className="mt-6 text-4xl font-semibold">{post.title}</h1>
-        <p className="mt-4 text-lg text-[var(--muted-600)]">{post.excerpt}</p>
-        <div className="mt-12 space-y-6 text-[var(--muted-600)]">
-          <p>
-            Placeholder article body for {post.title}. Replace this with MDX content once the CMS is wired up. For now, we outline the key talking points clients and experts should see.
-          </p>
-          <p>
-            1. Context of the problem we solved.
-            2. The hybrid squad assembled.
-            3. Outcomes and metrics delivered.
-          </p>
-          <p>
-            When we launch RLHF/data-annotation, these posts will also cover tooling, QA loops, and compensation patterns so experts know what to expect.
-          </p>
-        </div>
-        <div className="mt-12 border-t border-[var(--border-soft)] pt-6 text-sm text-[var(--muted-600)]">
-          <Link href="/blog" className="text-[var(--accent-600)]">
-            ← Back to all posts
-          </Link>
+    <article className="bg-[var(--sand-50)] min-h-screen pb-24">
+
+      {/* Hero Section */}
+      <div className="relative h-[60vh] min-h-[400px] w-full overflow-hidden">
+        <Image
+          src={post.heroImage}
+          alt={post.title}
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+
+        <div className="absolute bottom-0 left-0 w-full p-6 pb-12 sm:p-12">
+          <div className="mx-auto max-w-4xl">
+            <span className="inline-block rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-200 backdrop-blur-md border border-cyan-500/30 mb-6">
+              {post.tag}
+            </span>
+            <h1 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl leading-tight mb-6">
+              {post.title}
+            </h1>
+
+            <div className="flex flex-wrap items-center gap-6 text-sm font-medium text-gray-300">
+
+
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 opacity-70" />
+                <span>{post.date}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 opacity-70" />
+                <span>{post.readTime}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Main Content (Client Component for Theming) */}
+      <BlogPostContent post={post} />
     </article>
   );
 }

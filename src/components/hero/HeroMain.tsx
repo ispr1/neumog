@@ -59,6 +59,9 @@ export function HeroMain() {
               alt="Hybrid dev network collaboration"
               width={1400}
               height={900}
+              priority
+              quality={80}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1400px"
               className="relative z-10 w-full rounded-2xl object-cover aspect-[16/9]"
             />
           </div>

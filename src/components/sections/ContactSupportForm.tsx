@@ -1,17 +1,22 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { contactInfo } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export function ContactSupportForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { theme } = useTheme();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
+    const form = event.currentTarget;
 
     try {
       const response = await fetch('/api/submit-form', {
@@ -22,14 +27,21 @@ export function ContactSupportForm() {
 
       if (response.ok) {
         alert('Message sent successfully!');
-        event.currentTarget.reset();
+        form.reset();
       } else {
-        const error = await response.json();
-        alert('Error: ' + (error.error || 'Failed to send message'));
+        const error = await response.json().catch(() => ({}));
+        const errorMsg = error.details || error.error || 'Failed to send message';
+        alert('Error: ' + errorMsg);
       }
     } catch (err) {
       console.error(err);
-      alert('An unexpected error occurred.');
+      if (err instanceof TypeError && err.message === 'Failed to fetch') {
+        alert('Network error. Please check your connection and try again.');
+      } else {
+        alert('An unexpected error occurred. Please try again.');
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -124,8 +136,8 @@ export function ContactSupportForm() {
                 }
               />
             </div>
-            <Button type="submit" className="w-full">
-              Send message
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? 'Sending...' : 'Send message'}
             </Button>
           </div>
         </form>

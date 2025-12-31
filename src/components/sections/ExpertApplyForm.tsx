@@ -1,13 +1,19 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { Button } from "@/components/ui/Button";
 
 export function ExpertApplyForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
+    const form = event.currentTarget;
 
     try {
       const response = await fetch('/api/submit-form', {
@@ -18,14 +24,16 @@ export function ExpertApplyForm() {
 
       if (response.ok) {
         alert('Application submitted successfully!');
-        event.currentTarget.reset();
+        form.reset();
       } else {
-        const error = await response.json();
+        const error = await response.json().catch(() => ({}));
         alert('Error: ' + (error.error || 'Submission failed'));
       }
     } catch (err) {
       console.error(err);
-      alert('An unexpected error occurred.');
+      alert('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -63,7 +71,7 @@ export function ExpertApplyForm() {
         </label>
         <input
           id="skills"
-          name="skills"
+          name="coreSkills"
           placeholder="e.g. Product design, Android, MLOps"
           required
           className="mt-2 w-full rounded-2xl border border-[var(--border-soft)] bg-[var(--sand-50)] px-4 py-3 text-[var(--ink-900)] placeholder:text-[var(--muted-400)]"
@@ -75,7 +83,7 @@ export function ExpertApplyForm() {
         </label>
         <input
           id="hours"
-          name="hours"
+          name="availability"
           placeholder="10 hrs/week"
           className="mt-2 w-full rounded-2xl border border-[var(--border-soft)] bg-[var(--sand-50)] px-4 py-3 text-[var(--ink-900)] placeholder:text-[var(--muted-400)]"
         />
@@ -86,7 +94,7 @@ export function ExpertApplyForm() {
         </label>
         <input
           id="portfolio"
-          name="portfolio"
+          name="portfolioLink"
           className="mt-2 w-full rounded-2xl border border-[var(--border-soft)] bg-[var(--sand-50)] px-4 py-3 text-[var(--ink-900)] placeholder:text-[var(--muted-400)]"
         />
       </div>
@@ -101,8 +109,8 @@ export function ExpertApplyForm() {
           className="mt-2 w-full rounded-2xl border border-[var(--border-soft)] bg-[var(--sand-50)] px-4 py-3 text-[var(--ink-900)] placeholder:text-[var(--muted-400)]"
         />
       </div>
-      <Button type="submit" className="w-full">
-        Submit application
+      <Button type="submit" className="w-full" disabled={isSubmitting}>
+        {isSubmitting ? 'Submitting...' : 'Submit application'}
       </Button>
     </form>
   );

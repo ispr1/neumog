@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: 'Neumog: Hybrid Product Teams',
+        name: 'Neumog | Product Development Services & Software Engineering',
         short_name: 'Neumog',
         description: 'Managed product delivery, not a marketplace. Trusted experts in product, engineering, data science, and AI/ML.',
         start_url: '/',

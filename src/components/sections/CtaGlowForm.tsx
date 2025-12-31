@@ -1,16 +1,21 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export function CtaGlowForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { theme } = useTheme();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default browser form submission
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
+    const form = event.currentTarget; // Capture reference for reset
 
     try {
       const response = await fetch('/api/submit-form', {
@@ -21,16 +26,22 @@ export function CtaGlowForm() {
 
       if (response.ok) {
         alert('Project brief submitted successfully!');
-        event.currentTarget.reset();
+        form.reset();
       } else {
-        const error = await response.json();
+        const error = await response.json().catch(() => ({})); // Prevent parse error
         const errorMsg = error.details || error.error || 'Submission failed';
         alert('Form submission error: ' + errorMsg);
         console.error('Server Error:', error);
       }
     } catch (err) {
-      console.error(err);
-      alert('An unexpected error occurred.');
+      console.error('Submission Error:', err);
+      if (err instanceof TypeError && err.message === 'Failed to fetch') {
+        alert('Network error. Please check your connection and try again.');
+      } else {
+        alert('An unexpected error occurred. Please try again.');
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -108,8 +119,8 @@ export function CtaGlowForm() {
                 }
               />
             </div>
-            <Button type="submit" className="w-full">
-              Submit brief
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? 'Submitting...' : 'Submit brief'}
             </Button>
           </div>
         </form>

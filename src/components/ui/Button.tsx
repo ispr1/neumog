@@ -11,6 +11,7 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export function Button({
@@ -20,6 +21,7 @@ export function Button({
   className,
   onClick,
   type = "button",
+  disabled,
 }: ButtonProps) {
   const { theme } = useTheme();
 
@@ -61,7 +63,7 @@ export function Button({
   }
 
   return (
-    <button type={type} className={baseClasses} onClick={onClick}>
+    <button type={type} className={baseClasses} onClick={onClick} disabled={disabled}>
       {content}
     </button>
   );

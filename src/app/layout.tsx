@@ -16,35 +16,35 @@ const geistMono = Geist_Mono({
 
 
 export const metadata: Metadata = {
-  title: "Neumog: Hybrid Product Teams",
+  title: "Neumog | Product Development Services & Software Engineering",
   description:
     "Managed product delivery, not a marketplace. Trusted experts in product, engineering, data science, and AI/ML.",
-  metadataBase: new URL("https://neumog.com"),
+  metadataBase: new URL("https://neumog.tech"),
   openGraph: {
-    title: "Neumog: Hybrid Product Teams",
+    title: "Neumog | Product Development Services & Software Engineering",
     description:
       "Managed product delivery, not a marketplace. Trusted experts in product, engineering, data science, and AI/ML.",
-    url: "https://neumog.com",
+    url: "https://neumog.tech",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Neumog Hybrid Product Teams",
+        alt: "Neumog | Product Development Services & Software Engineering",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Neumog: Hybrid Product Teams",
+    title: "Neumog | Product Development Services & Software Engineering",
     description:
       "Managed product delivery, not a marketplace. Trusted experts in product, engineering, data science, and AI/ML.",
     images: ["/og-image.jpg"],
   },
 
   alternates: {
-    canonical: "https://neumog.com",
+    canonical: "https://neumog.tech",
   },
 };
 
