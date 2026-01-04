@@ -11,17 +11,17 @@ export default function manifest(): MetadataRoute.Manifest {
         theme_color: '#7c3aed', // Primary violet
         icons: [
             {
-                src: '/icon?id=small',
+                src: '/icon/small',
                 sizes: '32x32',
                 type: 'image/png',
             },
             {
-                src: '/icon?id=medium',
+                src: '/icon/medium',
                 sizes: '192x192',
                 type: 'image/png',
             },
             {
-                src: '/icon?id=large',
+                src: '/icon/large',
                 sizes: '512x512',
                 type: 'image/png',
             },
