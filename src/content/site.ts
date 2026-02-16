@@ -275,7 +275,7 @@ export const blogPosts = [
 export const faqHeading = {
   eyebrow: "FAQ",
   title: "Questions we hear every week",
-  description: "If you need more detail, email hello@neumog.com",
+  description: "If you need more detail, email hello@neumog.tech",
 };
 
 export const faqItems: FAQItem[] = [
@@ -296,7 +296,7 @@ export const faqItems: FAQItem[] = [
 ];
 
 export const contactInfo = {
-  email: "hello@neumog.com",
+  email: "hello@neumog.tech",
   phone: "+91 83094 70360",
   whatsapp: "+91 89853 95260",
   address: "Distributed team across country, NA, EU, and APAC",
