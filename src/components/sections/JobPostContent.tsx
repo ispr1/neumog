@@ -9,7 +9,7 @@ import { JobPost } from "@/lib/careers-db";
 export function JobPostContent({ job }: { job: JobPost }) {
     const { theme } = useTheme();
 
-    const applyLink = `mailto:hr@neumog.com?subject=Application for ${job.title} (${job.id})`;
+    const applyLink = `mailto:hr@neumog.tech?subject=Application for ${job.title} (${job.id})`;
 
     return (
         <div className={theme === "dark"
@@ -170,3 +170,4 @@ export function JobPostContent({ job }: { job: JobPost }) {
         </div>
     );
 }
+
